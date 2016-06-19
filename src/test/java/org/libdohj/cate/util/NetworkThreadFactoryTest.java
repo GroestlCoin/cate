@@ -15,10 +15,11 @@
  */
 package org.libdohj.cate.util;
 
+import org.bitcoinj.params.MainNetParams;
 import org.libdohj.cate.util.NetworkThreadFactory;
 import org.bitcoinj.core.Context;
 import org.bitcoinj.params.TestNet3Params;
-import org.libdohj.params.DogecoinTestNet3Params;
+
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class NetworkThreadFactoryTest {
     @Test
     public void shouldSetContextOnThread() throws InterruptedException {
         final Context expected = new Context(TestNet3Params.get());
-        final Context broken = new Context(DogecoinTestNet3Params.get());
+        final Context broken = new Context(MainNetParams.get());
         final NetworkThreadFactory factory = new NetworkThreadFactory(expected);
 
         // Progagate the wrong context onto this thread

@@ -17,6 +17,9 @@ public class BlockExplorerResolver {
     private static final String CHAINSO_PATH_BTCTEST = "BTCTEST/";
     private static final String CHAINSO_PATH_LTCTEST = "LTCTEST/";
     private static final String CHAINSO_PATH_DOGETEST = "DOGETEST/";
+    private static final String CHAINZ_CRYPTOID_GRS = "grs/";
+    private static final String CHAINZ_CRYPTOID_BASE_URL = "https://chainz.cryptoid.info/";
+    private static final String CHAINZ_CRYPTOID_PATH_TX = "tx.dws?";
 
     public static String getUrl(WalletTransaction wtx) {
         // TODO: This should take into account a setting the user can make for the explorer to use.
@@ -24,16 +27,16 @@ public class BlockExplorerResolver {
     }
 
     public static String getChainSoUrl(WalletTransaction wtx) {
-        StringBuilder sb = new StringBuilder(CHAINSO_BASE_URL);
-        sb.append(CHAINSO_PATH_TX);
+        StringBuilder sb = new StringBuilder(CHAINZ_CRYPTOID_BASE_URL);
         sb.append(networkCodeToPath(NetworkResolver.getCode(wtx.getParams())));
+        sb.append(CHAINZ_CRYPTOID_PATH_TX);
         sb.append(wtx.getTransaction().getHashAsString());
         return sb.toString();
     }
 
     private static String networkCodeToPath(NetworkResolver.NetworkCode code) {
         switch (code) {
-            case BTC:
+            /**case BTC:
                 return CHAINSO_PATH_BTC;
             case BTCTEST:
                 return CHAINSO_PATH_BTCTEST;
@@ -44,7 +47,9 @@ public class BlockExplorerResolver {
             case DOGE:
                 return CHAINSO_PATH_DOGE;
             case DOGETEST:
-                return CHAINSO_PATH_DOGETEST;
+                return CHAINSO_PATH_DOGETEST;*/
+            case GRS:
+                return CHAINZ_CRYPTOID_GRS;
             default:
                 return "";
         }

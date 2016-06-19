@@ -3,9 +3,7 @@ package org.libdohj.cate.util;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.params.MainNetParams;
 import org.bitcoinj.params.TestNet3Params;
-import org.libdohj.params.DogecoinMainNetParams;
-import org.libdohj.params.DogecoinTestNet3Params;
-import org.libdohj.params.LitecoinMainNetParams;
+
 
 import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
@@ -22,20 +20,15 @@ public class NetworkResolver {
     private static final LinkedHashMap<NetworkCode, NetworkParameters> networksByCode = new LinkedHashMap<>();
 
     public enum NetworkCode { // This is way more type safe than some String
-        BTC,
-        BTCTEST,
-        LTC,
-        LTCTEST,
-        DOGE,
-        DOGETEST
+        GRS
     }
 
     static {
-        registerNetwork(MainNetParams.get(), "Bitcoin", NetworkCode.BTC);
-        registerNetwork(TestNet3Params.get(), "Bitcoin test", NetworkCode.BTCTEST);
-        registerNetwork(LitecoinMainNetParams.get(), "Litecoin", NetworkCode.LTC);
-        registerNetwork(DogecoinMainNetParams.get(), "Dogecoin", NetworkCode.DOGE);
-        registerNetwork(DogecoinTestNet3Params.get(), "Dogecoin test", NetworkCode.DOGETEST);
+        registerNetwork(MainNetParams.get(), "Groestlcoin", NetworkCode.GRS);
+        //registerNetwork(TestNet3Params.get(), "Bitcoin test", NetworkCode.BTCTEST);
+        //registerNetwork(LitecoinMainNetParams.get(), "Litecoin", NetworkCode.LTC);
+        //registerNetwork(DogecoinMainNetParams.get(), "Dogecoin", NetworkCode.DOGE);
+        //registerNetwork(DogecoinTestNet3Params.get(), "Dogecoin test", NetworkCode.DOGETEST);
     }
 
     private static void registerNetwork(final NetworkParameters params, final String name, NetworkCode code) {

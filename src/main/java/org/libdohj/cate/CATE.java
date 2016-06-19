@@ -43,7 +43,7 @@ public class CATE extends Application {
 
     private static CATE instance;
 
-    private static final String APPLICATION_NAME_FOLDER = "CATE";
+    private static final String APPLICATION_NAME_FOLDER = "GroestlcoinLite";
     private static Logger logger = Logger.getLogger(CATE.class.getName());
     private static final DataDirFactory dataDirFactory = new DataDirFactory(APPLICATION_NAME_FOLDER);
 
@@ -77,9 +77,7 @@ public class CATE extends Application {
 
         root.getStylesheets().add(DEFAULT_STYLESHEET);
         this.controller = (MainController) loader.getController();
-        this.controller.connectTo(NetworkResolver.getParameter("Bitcoin"), dataDir);
-        this.controller.connectTo(NetworkResolver.getParameter("Litecoin"), dataDir);
-        this.controller.connectTo(NetworkResolver.getParameter("Dogecoin"), dataDir);
+        this.controller.connectTo(NetworkResolver.getParameter("Groestlcoin"), dataDir);
 
         NotificationPane notificationPane = new NotificationPane(root);
         this.controller.setNotificationPane(notificationPane);

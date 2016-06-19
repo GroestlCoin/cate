@@ -142,6 +142,15 @@
       </plugins>
     </build>
 
+    <repositories>
+    <!-- Define the MultiBit staging repository for releases and snapshots -->
+    <!-- Use https://rawgithub.com to provide a consistent result -->
+    <repository>
+        <id>my</id>
+        <url>file://${user.home}/AppData/.m2/repository</url>
+    </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -166,14 +175,9 @@
             <version>1.4.0</version>
         </dependency>
         <dependency>
-            <groupId>org.bitcoinj</groupId>
-            <artifactId>bitcoinj-core</artifactId>
-            <version>0.14.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.libdohj</groupId>
-            <artifactId>libdohj</artifactId>
-            <version>0.14.0</version>
+            <groupId>com.google</groupId>
+            <artifactId>groestlcoinj-core</artifactId>
+            <version>0.14</version>
         </dependency>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
@@ -205,6 +209,21 @@
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
             <version>8.40.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.madgag.spongycastle</groupId>
+            <artifactId>core</artifactId>
+            <version>1.51.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.madgag.spongycastle</groupId>
+            <artifactId>core</artifactId>
+            <version>1.51.0.0</version>
         </dependency>
     </dependencies>
 </project>
