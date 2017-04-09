@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.libdohj</groupId>
-    <artifactId>cate</artifactId>
+    <artifactId>groestlcoin-lite</artifactId>
     <version>0.14-SNAPSHOT</version>
 
     <licenses>
@@ -15,8 +15,8 @@
 
     <developers>
         <developer>
-            <name>The libdohj team</name>
-            <email>info@libdohj.org</email>
+            <name>Hash Engineering Solutions</name>
+            <email>hashengineeringsolutions@gmail.com</email>
         </developer>
     </developers>
 
@@ -175,9 +175,9 @@
             <version>1.4.0</version>
         </dependency>
         <dependency>
-            <groupId>com.google</groupId>
+            <groupId>org.groestlcoinj</groupId>
             <artifactId>groestlcoinj-core</artifactId>
-            <version>0.14</version>
+            <version>0.14.4</version>
         </dependency>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
