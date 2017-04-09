@@ -18,10 +18,10 @@ Then use Git to clone the repositories for, and Maven to install:
 
 * https://github.com/groestlcoin/groestlcoinj
 
-To install the libraries, run "mvn install" within the cloned
+To install the libraries, run "mvn install -DskipTests" within the cloned
 repository. In both cases the master (default) branch must be used, as Groestlcoin Lite requires
 the latest code.
 
 Once that is done, clone the Groestlcoin Lite repository and run "mvn package" to build it.
-This will produce an JAR file "target/Groestlcoin Lite.jar", double click
+This will produce an JAR file "target/groestlcoin-lite-XXXXXXXXX.jar", double click
 it to run.
