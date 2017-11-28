@@ -1,121 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.libdohj</groupId>
     <artifactId>groestlcoin-lite</artifactId>
     <version>0.14.1</version>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>Hash Engineering Solutions</name>
-            <email>hashengineeringsolutions@gmail.com</email>
-        </developer>
-    </developers>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-
-        <izpack.version>5.0.6</izpack.version>
-        <izpack.staging>${project.build.directory}/staging</izpack.staging>
-        <installer-output-filename>cate-${project.version}-installer.jar</installer-output-filename>
-    </properties>
-
-    <!--
-      - This builds:
-      - 1. A regular JAR of just the CATE classes
-      - 2. A full executable JAR including dependencies
-      - 3. A staging area for IZ Pack, containing the executable from stage 2
-      - 4. An IZ Pack installer
-    -->
     <build>
-      <plugins>
-
-        <!-- Create main executable jar -->
-        <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.6</version>
-            <configuration>
-                <descriptors>
-                    <descriptor>src/main/assemble/exe.xml</descriptor>
-                </descriptors>
-                <archive>
-                    <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-                </archive>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>make-assembly</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
-        <!-- Create the staging directory -->
-        <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-               <execution>
-                  <id>create-staging-area</id>
-                  <phase>process-resources</phase>
-                  <goals>
-                     <goal>run</goal>
-                  </goals>
-                  <configuration>
-                     <tasks>
-                        <mkdir dir="${izpack.staging}" />
-                     </tasks>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-
-        <!-- Copy IZ Pack files to the staging directory -->
-        <plugin>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>2.7</version>
-            <executions>
-                <execution>
-                    <id>create-staging-area</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>copy-resources</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${izpack.staging}</outputDirectory>
-                        <resources>
-                            <resource>
-                                <directory>src/main/izpack</directory>
-                                <filtering>true</filtering>
-                                <includes>
-                                    <include>install.xml</include>
-                                </includes>
-                            </resource>
-                            <resource>
-                                <directory>target</directory>
-                                <includes>
-                                    <include>cate-${project.version}-exe.jar</include>
-                                </includes>
-                            </resource>
-                        </resources>
-                    </configuration>
-                </execution>
-            </executions>
-         </plugin>
-
-        <plugin>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <!-- Create the bundled JAR, it's easier for some people -->
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <minimizeJar>false</minimizeJar>
+                            <filters>
+                                <filter>
+                                    <!-- exclude signatures, the bundling process breaks them for some reason -->
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>bundled</shadedClassifierName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>GRSX.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                            <outputFile>target/GRSX.jar</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			<plugin>
            <groupId>org.codehaus.izpack</groupId>
            <artifactId>izpack-maven-plugin</artifactId>
            <version>${izpack.version}</version>
@@ -139,20 +68,43 @@
               </dependency>
             </dependencies>
          </plugin>
-      </plugins>
+        </plugins>
     </build>
 
-    <repositories>
-    <!-- Define the MultiBit staging repository for releases and snapshots -->
-    <!-- Use https://rawgithub.com to provide a consistent result -->
-    <repository>
-        <id>my</id>
-        <url>file://${user.home}/AppData/.m2/repository</url>
-    </repository>
-    </repositories>
+	   <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <izpack.version>5.0.6</izpack.version>
+        <izpack.staging>${project.build.directory}/staging</izpack.staging>
+        <installer-output-filename>cate-${project.version}-installer.jar</installer-output-filename>
+    </properties>
 
     <dependencies>
+        <!-- Native Mac skin (there's also AeroFX, MetroFX, etc)
         <dependency>
+            <groupId>com.aquafx-project</groupId>
+            <artifactId>aquafx</artifactId>
+            <version>0.1</version>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>org.fxmisc.easybind</groupId>
+            <artifactId>easybind</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.glxn</groupId>
+            <artifactId>qrgen</artifactId>
+            <version>1.3</version>
+        </dependency>
+<dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.7</version>
