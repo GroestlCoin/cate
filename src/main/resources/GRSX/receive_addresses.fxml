@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@wallet.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GRSX.ReceiveAddressesController">
+<children>
+      <VBox opacity="0.25" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;">
+         <children>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="36.0" prefWidth="123.0" text="Receiving" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
+            <Label text="Clicking an address will copy the text to your clipboard." textAlignment="CENTER" textFill="WHITE">
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
+          <ListView fx:id="addresses" onMouseClicked="#handleMouseClick" prefHeight="246.0" prefWidth="550.0" stylesheets="@wallet.css" translateY="5.0" />
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </VBox>
+    <HBox alignment="BOTTOM_RIGHT" layoutX="469.0" layoutY="17.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="17.0" StackPane.alignment="BOTTOM_RIGHT">
+        <children>
+            <Button fx:id="close" mnemonicParsing="false" onAction="#close" opacity="0.25" styleClass="btn" stylesheets="@wallet.css" text="Close" translateX="-5.0" translateY="-5.0" />
+        </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+    </HBox>
+</children>
+</StackPane>
