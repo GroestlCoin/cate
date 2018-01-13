@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane id="StackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="" stylesheets="@wallet.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GRSX.AddContactController">
+  <children>
+    <VBox alignment="CENTER_LEFT" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="226.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #263238;">
+      <children>
+            <Label fx:id="addLabel" text="Add Contact" textFill="#64ffda" translateY="-15.0">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <HBox fx:id="topHBox" alignment="CENTER_LEFT" prefHeight="4.0" prefWidth="511.0" spacing="15.0" translateY="-25.0">
+               <children>
+                  <Label fx:id="btcLabel" text="Name" textAlignment="CENTER" textFill="#64ffda">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="amountEdit" promptText="Alex" style="-fx-text-fill: #64ffda; -fx-background-color: gray;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="528.0" spacing="15.0" translateY="-35.0">
+               <children>
+                  <Label text="Address" textAlignment="CENTER" textFill="#64ffda">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+              <TextField fx:id="address" maxWidth="1.7976931348623157E308" promptText="FdcwMRoEmEAjPBn72ptje39bT7wtjXzuDy" style="-fx-text-fill: #64ffda; -fx-background-color: gray;" HBox.hgrow="ALWAYS">
+                <VBox.margin>
+                  <Insets />
+                </VBox.margin>
+              </TextField>
+               </children>
+            </HBox>
+      </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+    </VBox>
+  <HBox alignment="BOTTOM_CENTER" fillHeight="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="197.0" spacing="15.0" translateX="-20.0" translateY="-110.0" StackPane.alignment="BOTTOM_RIGHT">
+    <children>
+      <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancel" prefHeight="36.0" prefWidth="85.0" styleClass="btn" stylesheets="@wallet.css" text="Cancel" textFill="#263238">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+      <Button fx:id="sendBtn" defaultButton="true" mnemonicParsing="false" onAction="#add" prefHeight="36.0" prefWidth="76.0" styleClass="btn" stylesheets="@wallet.css" text="Add" textFill="#263238">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+    </children>
+  </HBox>
+  </children>
+</StackPane>

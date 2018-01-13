@@ -11,31 +11,47 @@
 
 <StackPane id="StackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="" stylesheets="@wallet.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GRSX.SendMoneyController">
   <children>
-    <VBox alignment="CENTER_LEFT" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.25" prefHeight="226.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: black;">
+    <VBox alignment="CENTER_LEFT" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.85" prefHeight="272.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #263238;">
       <children>
-            <Label text="Sending" textFill="WHITE" translateY="-15.0">
+            <Label text="Sending" textFill="#64ffda" translateY="-5.0">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <HBox fx:id="topHBox" alignment="CENTER_LEFT" prefHeight="4.0" prefWidth="511.0" spacing="15.0" translateY="-25.0">
+            <HBox fx:id="topHBox" alignment="CENTER_LEFT" prefHeight="4.0" prefWidth="511.0" spacing="15.0" translateY="-20.0">
                <children>
-                  <TextField fx:id="amountEdit" style="-fx-text-fill: #ffffff; -fx-background-color: gray;" />
-                  <Label fx:id="btcLabel" text="GRS" textAlignment="CENTER" textFill="WHITE">
+                  <TextField fx:id="amountEdit" style="-fx-text-fill: #64ffda; -fx-background-color: gray;" />
+                  <Label fx:id="btcLabel" text="GRS" textAlignment="CENTER" textFill="#64ffda">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="528.0" spacing="15.0" translateY="-35.0">
+            <Label layoutX="40.0" layoutY="23.0" text="Minimum fee: 10 sat/byte" textFill="#64ffda" translateY="-35.0" />
+            <HBox fx:id="topHBox1" alignment="CENTER_LEFT" layoutX="40.0" layoutY="106.0" prefHeight="4.0" prefWidth="511.0" spacing="15.0" translateY="-50.0">
                <children>
-                  <Label text="Receiving" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="satByteLabel1" layoutX="174.0" layoutY="10.0" text="Fee" textAlignment="CENTER" textFill="#64ffda">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-              <TextField fx:id="address" maxWidth="1.7976931348623157E308" promptText="FdcwMRoEmEAjPBn72ptje39bT7wtjXzuDy" style="-fx-text-fill: #ffffff; -fx-background-color: gray;" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="feeEdit" style="-fx-text-fill: #64ffda; -fx-background-color: gray;" />
+                  <Label fx:id="satByteLabel" text="satoshis/byte" textAlignment="CENTER" textFill="#64ffda">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="528.0" spacing="15.0" translateY="-65.0">
+               <children>
+                  <Label text="Receiving" textAlignment="CENTER" textFill="#64ffda">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+              <TextField fx:id="address" maxWidth="1.7976931348623157E308" promptText="FdcwMRoEmEAjPBn72ptje39bT7wtjXzuDy" style="-fx-text-fill: #64ffda; -fx-background-color: gray;" HBox.hgrow="ALWAYS">
                 <VBox.margin>
                   <Insets />
                 </VBox.margin>
@@ -47,10 +63,16 @@
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </padding>
     </VBox>
-  <HBox alignment="BOTTOM_CENTER" fillHeight="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="197.0" spacing="15.0" translateX="-20.0" translateY="-110.0" StackPane.alignment="BOTTOM_RIGHT">
+  <HBox alignment="BOTTOM_CENTER" fillHeight="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="197.0" spacing="15.0" translateX="-20.0" translateY="-90.0" StackPane.alignment="BOTTOM_RIGHT">
     <children>
-      <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancel" opacity="0.25" prefHeight="36.0" prefWidth="85.0" styleClass="btn" stylesheets="@wallet.css" text="Cancel" />
-      <Button fx:id="sendBtn" defaultButton="true" mnemonicParsing="false" onAction="#send" opacity="0.25" prefHeight="36.0" prefWidth="76.0" styleClass="btn" stylesheets="@wallet.css" text="Send" />
+      <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancel" prefHeight="36.0" prefWidth="85.0" styleClass="btn" stylesheets="@wallet.css" text="Cancel" textFill="#263238">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+      <Button fx:id="sendBtn" defaultButton="true" mnemonicParsing="false" onAction="#send" prefHeight="36.0" prefWidth="76.0" styleClass="btn" stylesheets="@wallet.css" text="Send" textFill="#263238">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
     </children>
   </HBox>
   </children>

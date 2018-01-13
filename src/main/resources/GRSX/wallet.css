@@ -58,11 +58,8 @@
 }
 
 .btn {
-  -fx-font-family: Arial;
-  -fx-text-fill: white;
-  -fx-font-size: 14px;
-  -fx-background-color: #000000;
-  -fx-padding: 10px 20px 10px 20px;
+  -fx-background-color: #64ffda;
+  -fx-padding: 6px 12px 6px 12px;
   -fx-text-decoration: none;
 }
 
@@ -78,9 +75,10 @@
     -fx-padding: 0;
 }
 .list-cell {
-    -fx-background-color: #000000;
-    -fx-text-fill: white;
-}
+     -fx-font-size: 16.75px;
+     -fx-background-color: #000000;
+     -fx-text-fill: #64ffda;
+ }
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-background-color: #000000;

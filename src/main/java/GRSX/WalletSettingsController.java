@@ -56,7 +56,7 @@ public class WalletSettingsController {
 
     public void initialize()
     {
-        DeterministicSeed seed = Main.bitcoin.wallet().getKeyChainSeed();
+        DeterministicSeed seed = Main.groestlcoin.wallet().getKeyChainSeed();
 
         Instant creationTime = Instant.ofEpochSecond(seed.getCreationTimeSeconds());
         LocalDate origDate = creationTime.atZone(ZoneId.systemDefault()).toLocalDate();
@@ -79,9 +79,9 @@ public class WalletSettingsController {
     }
 
     public void restoreClicked(ActionEvent event) {
-        if (Main.bitcoin.wallet().getBalance().value > 0)
+        if (Main.groestlcoin.wallet().getBalance().value > 0)
         {
-            informationalAlert("Non-Empty Wallet Detected!",
+            informationalAlert("Vortex Notification",
                     "You must empty this wallet out before attempting to restore an older one, as mixing wallets " +
                             "together can lead to invalidated backups.");
             return;
@@ -90,26 +90,25 @@ public class WalletSettingsController {
         overlayUI.done();
         Main.instance.controller.restoreFromSeedAnimation();
 
-        long birthday = datePicker.getValue().atStartOfDay().toEpochSecond(ZoneOffset.UTC);
-        DeterministicSeed seed = new DeterministicSeed(Splitter.on(' ').splitToList(wordsArea.getText()), null, "", birthday);
-        Main.bitcoin.addListener(new Service.Listener()
+        DeterministicSeed seed = new DeterministicSeed(Splitter.on(' ').splitToList(wordsArea.getText()), null, "", 0);
+        Main.groestlcoin.addListener(new Service.Listener()
         {
             @Override
             public void terminated(Service.State from)
             {
                 Main.instance.setupWalletKit(seed);
-                Main.bitcoin.startAsync();
+                Main.groestlcoin.startAsync();
             }
         }, Platform::runLater
         );
 
-        Main.bitcoin.stopAsync();
+        Main.groestlcoin.stopAsync();
     }
 
     public void openDonation(ActionEvent actionEvent) {
         try
         {
-                Desktop.getDesktop().browse(new URI("http://donate.duudle.xyz"));
+                Desktop.getDesktop().browse(new URI("https://duudl3.xyz/donate.html"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {

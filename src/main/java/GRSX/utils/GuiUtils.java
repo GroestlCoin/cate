@@ -21,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -47,6 +48,7 @@ public class GuiUtils {
             AlertWindowController controller = loader.getController();
             setup.accept(dialogStage, controller);
             dialogStage.setScene(new Scene(pane));
+            dialogStage.getIcons().add(new Image("https://duudl3.xyz/img/vortex_wallet_logo.png"));
             dialogStage.showAndWait();
         } catch (IOException e) {
             // We crashed whilst trying to show the alert dialog (this should never happen). Give up!
@@ -129,7 +131,7 @@ public class GuiUtils {
         GaussianBlur blur = new GaussianBlur(0.0);
         node.setEffect(blur);
         Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(blur.radiusProperty(), 15);
+        KeyValue kv = new KeyValue(blur.radiusProperty(), 25);
         KeyFrame kf = new KeyFrame(Duration.millis(UI_ANIMATION_TIME_MSEC), kv);
         timeline.getKeyFrames().add(kf);
         timeline.play();
@@ -168,15 +170,8 @@ public class GuiUtils {
         return scale;
     }
 
-    /**
-     * A useful helper for development purposes. Used as a switch for loading files from local disk, allowing live
-     * editing whilst the app runs without rebuilds.
-     */
     public static URL getResource(String name) {
-        if (false)
-            return unchecked(() -> new URL("file:///your/path/here/src/main/wallettemplate/" + name));
-        else
-            return MainController.class.getResource(name);
+        return MainController.class.getResource(name);
     }
 
     public static void checkGuiThread() {

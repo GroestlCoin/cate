@@ -25,7 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import GRSX.controls.BitcoinAddressValidator;
+import GRSX.controls.GroestlcoinAddressValidator;
 import GRSX.utils.TextFieldValidator;
 import GRSX.utils.WTUtils;
 
@@ -46,12 +46,10 @@ public class SendMoneyController {
 
     // Called by FXMLLoader
     public void initialize() {
-        Coin balance = Main.bitcoin.wallet().getBalance();
+        Coin balance = Main.groestlcoin.wallet().getBalance();
         checkState(!balance.isZero());
-        new BitcoinAddressValidator(Main.params, address, sendBtn);
-        new TextFieldValidator(amountEdit, text ->
-                !WTUtils.didThrow(() -> checkState(Coin.parseCoin(text).compareTo(balance) <= 0)));
-        amountEdit.setText(balance.toPlainString());
+        new GroestlcoinAddressValidator(Main.params, address, sendBtn);
+        new TextFieldValidator(amountEdit, text -> !WTUtils.didThrow(() -> checkState(Coin.parseCoin(text).compareTo(balance) <= 0)));
     }
 
     public void cancel(ActionEvent event) {
@@ -59,41 +57,57 @@ public class SendMoneyController {
     }
 
     public void send(ActionEvent event) {
-        // Address exception cannot happen as we validated it beforehand.
-        try {
-            Coin amount = Coin.parseCoin(amountEdit.getText());
-            Address destination = Address.fromBase58(Main.params, address.getText());
-            SendRequest req;
+        Coin amount = Coin.parseCoin(amountEdit.getText());
 
-            if (amount.equals(Main.bitcoin.wallet().getBalance()))
-                req = SendRequest.emptyWallet(destination);
-            else
-                req = SendRequest.to(destination, amount);
+        if(amount.getValue() > 0.0 && Integer.parseInt(feeEdit.getText()) >= 10)
+        {
+            try
+            {
+                Address destination = Address.fromBase58(Main.params, address.getText());
+                SendRequest req = null;
 
-            sendResult = Main.bitcoin.wallet().sendCoins(req);
-            Futures.addCallback(sendResult.broadcastComplete, new FutureCallback<Transaction>() {
-                @Override
-                public void onSuccess(Transaction result) {
-                    checkGuiThread();
-                    overlayUI.done();
+                if (amount.equals(Main.groestlcoin.wallet().getBalance()))
+                {
+                    req = SendRequest.emptyWallet(destination);
+                }
+                else
+                {
+                    req = SendRequest.to(destination, amount);
                 }
 
-                @Override
-                public void onFailure(Throwable t) {
-                    // We died trying to empty the wallet.
-                    crashAlert(t);
-                }
-            });
-            sendResult.tx.getConfidence().addEventListener((tx, reason) -> {
-            });
-            sendBtn.setDisable(true);
-            address.setDisable(true);
-            ((HBox)amountEdit.getParent()).getChildren().remove(amountEdit);
-            ((HBox)btcLabel.getParent()).getChildren().remove(btcLabel);
-        } catch (InsufficientMoneyException e) {
-            informationalAlert("Insufficient Funds",
-                    "You do not have enough GRS for this transaction.");
-            overlayUI.done();
+                req.ensureMinRequiredFee = false;
+                req.feePerKb = Coin.valueOf(Long.parseLong(feeEdit.getText()) * 1000L);
+                sendResult = Main.groestlcoin.wallet().sendCoins(Main.groestlcoin.peerGroup(), req);
+                Futures.addCallback(sendResult.broadcastComplete, new FutureCallback<Transaction>()
+                {
+                    @Override
+                    public void onSuccess(Transaction result)
+                    {
+                        checkGuiThread();
+                        overlayUI.done();
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t)
+                    {
+                        // We died trying to empty the wallet.
+                        crashAlert(t);
+                    }
+                });
+                sendResult.tx.getConfidence().addEventListener((tx, reason) ->
+                {
+                });
+                sendBtn.setDisable(true);
+                address.setDisable(true);
+                ((HBox) amountEdit.getParent()).getChildren().remove(amountEdit);
+                ((HBox) btcLabel.getParent()).getChildren().remove(btcLabel);
+            }
+            catch (InsufficientMoneyException e)
+            {
+                informationalAlert("Vortex Notification",
+                        "You do not have enough GRS for this transaction.");
+                overlayUI.done();
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ public class AlertWindowController {
 
     /** Initialize this alert dialog for information about a crash. */
     public void crashAlert(Stage stage, String crashMessage) {
-        messageLabel.setText("Unfortunately, we screwed up and the app crashed. Sorry about that!");
+        messageLabel.setText("Unfortunately, Vortex screwed up and the app crashed. Sorry about that!");
         detailsLabel.setText(crashMessage);
 
         cancelButton.setVisible(false);

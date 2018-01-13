@@ -23,7 +23,7 @@ public class ReceiveAddressesController
     public Button close;
 
     public void initialize() {
-        addressesList.setAll(Main.bitcoin.wallet().getIssuedReceiveAddresses());
+        addressesList.setAll(Main.groestlcoin.wallet().getIssuedReceiveAddresses());
 
         Bindings.bindContent(addresses.getItems(), addressesList);
 
