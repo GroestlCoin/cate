@@ -29,7 +29,6 @@
               <Label font="$x1" text="GRS" textFill="#64ffda" />
           </children>
       </HBox>
-    <HBox fx:id="controlsBox" alignment="CENTER" fillHeight="true" layoutX="14.0" layoutY="347.0" minHeight="16.0" prefHeight="36.0" prefWidth="243.0" spacing="10.0" translateY="60.0" visible="true" AnchorPane.bottomAnchor="17.0" />
     <StackPane layoutX="334.0" layoutY="66.0" opacity="0.5" prefHeight="341.0" prefWidth="439.0" stylesheets="@wallet.css" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="334.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="66.0">
          <children>
             <ListView fx:id="transactionsList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openTransaction" prefHeight="340.0" prefWidth="440.0" style="-fx-background-color: black;" stylesheets="@wallet.css" />
@@ -72,5 +71,10 @@
          </font>
       </Label>
       <Label fx:id="txLabel1" layoutX="334.0" layoutY="45.0" prefHeight="21.0" prefWidth="393.0" text="Click on an entry to view transaction details. | ▼ = Received ▲ = Sent" textFill="#64feda" />
+      <Label alignment="CENTER" layoutX="119.0" layoutY="235.0" prefHeight="36.0" prefWidth="91.0" text="BETA" textAlignment="CENTER" textFill="#ff0000">
+         <font>
+            <Font name="System Bold" size="25.0" fx:id="x12" />
+         </font>
+      </Label>
   </children>
 </AnchorPane>
