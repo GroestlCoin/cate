@@ -40,12 +40,13 @@ import GRSX.utils.TextFieldValidator;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.Security;
 
 import static GRSX.utils.GuiUtils.*;
 
 public class Main extends Application {
     public static NetworkParameters params = MainNetParams.get();
-    public static final String APP_NAME = "Vortex GRS Wallet";
+    public static final String APP_NAME = "Vortex";
     private static final String WALLET_FILE_NAME = APP_NAME.replaceAll("[^a-zA-Z0-9.-]", "_") + "-" + params.getPaymentProtocolId();
     public static WalletAppKit groestlcoin;
     public static Main instance;
@@ -58,6 +59,8 @@ public class Main extends Application {
 
     public static void main(String[] args) 
     {
+        Security.setProperty("crypto.policy", "unlimited");
+
         launch(args);
     }
 
@@ -91,8 +94,10 @@ public class Main extends Application {
         mainWindow.setResizable(false);
         mainWindow.setMaxWidth(800);
         mainWindow.setMaxHeight(451);
+
         //using an online image to update the icon on the fly without needing to push new builds, just because i want to.
         mainWindow.getIcons().add(new Image("https://duudl3.xyz/img/vortex_wallet_logo.png"));
+
         BriefLogFormatter.init();
 
         Threading.USER_THREAD = Platform::runLater;
@@ -126,6 +131,9 @@ public class Main extends Application {
                 Platform.runLater(controller::onBitcoinSetup);
             }
         };
+
+        //for later
+       // groestlcoin.useTor();
 
         groestlcoin.setDownloadListener(controller.progressBarUpdater()).setBlockingStartup(false).setUserAgent(APP_NAME, "1.0");
 

@@ -71,10 +71,5 @@
          </font>
       </Label>
       <Label fx:id="txLabel1" layoutX="334.0" layoutY="45.0" prefHeight="21.0" prefWidth="393.0" text="Click on an entry to view transaction details. | ▼ = Received ▲ = Sent" textFill="#64feda" />
-      <Label alignment="CENTER" layoutX="119.0" layoutY="235.0" prefHeight="36.0" prefWidth="91.0" text="BETA" textAlignment="CENTER" textFill="#ff0000">
-         <font>
-            <Font name="System Bold" size="25.0" fx:id="x12" />
-         </font>
-      </Label>
   </children>
 </AnchorPane>

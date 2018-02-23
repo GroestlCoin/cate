@@ -14,7 +14,11 @@
 
 package GRSX;
 
+import com.subgraph.orchid.TorClient;
+import com.subgraph.orchid.TorInitializationListener;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.MouseEvent;
@@ -73,6 +77,31 @@ public class MainController {
         //disable send  button when balance is 0.00000000, this isnt really needed, but i like it.
         sendMoneyOutBtn.disableProperty().bind(model.balanceProperty().isEqualTo(Coin.ZERO));
 
+        //for later
+     /**   TorClient torClient = Main.groestlcoin.peerGroup().getTorClient();
+        if (torClient != null) {
+            SimpleDoubleProperty torProgress = new SimpleDoubleProperty(-1);
+            String torMsg = "Initialising Tor";
+            syncItem = Main.instance.notificationBar.pushItem(torMsg, torProgress);
+            torClient.addInitializationListener(new TorInitializationListener() {
+                @Override
+                public void initializationProgress(String message, int percent) {
+                    Platform.runLater(() -> {
+                        syncItem.label.set(torMsg + ": " + message);
+                        torProgress.set(percent / 100.0);
+                    });
+                }
+
+                @Override
+                public void initializationCompleted() {
+                    Platform.runLater(() -> {
+                        syncItem.cancel();
+                    });
+                }
+            });
+        } else {
+        }**/
+
         model.syncProgressProperty().addListener(x -> {
             if (model.syncProgressProperty().get() >= 1.0)
             {
@@ -91,6 +120,7 @@ public class MainController {
                 System.out.println("Wallet is NOT synced");
             }
         });
+
         Bindings.bindContent(transactionsList.getItems(), model.getTransactions());
 
         transactionsList.setCellFactory(param -> new TextFieldListCell<>(new StringConverter<Transaction>()
@@ -120,7 +150,7 @@ public class MainController {
                     return entry;
                 }
 
-                return "TxID " + tx.getHash();
+                return "ERROR | RETURNED " + tx.getHash() + " TX NOT + OR -";
             }
 
             @Override
@@ -173,7 +203,6 @@ public class MainController {
         if(transactionsList.getSelectionModel().getSelectedItem() != null) {
             transactionSelected = transactionsList.getSelectionModel().getSelectedIndex();
             Main.instance.overlayUI("transaction.fxml");
-          //  Desktop.getDesktop().browse(new URI("http://groestlsight.groestlcoin.org/tx/" + transactionsList.getSelectionModel().getSelectedItem().getHash()));
         }
 
     }
