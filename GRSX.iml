@@ -23,21 +23,12 @@
     <orderEntry type="library" name="Maven: org.groestlcoinj:groestlcoinj-core:0.14.4" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:4.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-jdk14:1.7.7" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.izpack:izpack-core:5.0.6" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.izpack:izpack-api:5.0.6" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.izpack:izpack-util:5.0.6" level="project" />
-    <orderEntry type="library" name="Maven: jline:jline:2.12" level="project" />
-    <orderEntry type="library" name="Maven: org.jdom:jdom2:2.0.5" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.izpack:izpack-tools:5.0.6" level="project" />
-    <orderEntry type="library" name="Maven: org.picocontainer:picocontainer:2.14.1" level="project" />
-    <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.ant:ant:1.9.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.9.4" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.izpack:izpack-installer:5.0.6" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.izpack:izpack-gui:5.0.6" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna-platform:4.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:8.40.10" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:17.0" level="project" />
     <orderEntry type="library" name="Maven: com.madgag.spongycastle:core:1.51.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.bitcoinj:orchid:1.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp:okhttp:2.7.2" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.6.0" level="project" />
   </component>
 </module>

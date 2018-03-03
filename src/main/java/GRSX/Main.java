@@ -14,11 +14,9 @@
 
 package GRSX;
 
-import GRSX.utils.ContactsSaveManager;
+import GRSX.utils.*;
 import com.google.common.util.concurrent.*;
 import javafx.scene.image.Image;
-import javafx.scene.input.*;
-import javafx.stage.StageStyle;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.kits.WalletAppKit;
 import org.bitcoinj.params.*;
@@ -34,8 +32,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import GRSX.controls.NotificationBarPane;
-import GRSX.utils.GuiUtils;
-import GRSX.utils.TextFieldValidator;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +43,7 @@ import static GRSX.utils.GuiUtils.*;
 public class Main extends Application {
     public static NetworkParameters params = MainNetParams.get();
     public static final String APP_NAME = "Vortex";
-    private static final String WALLET_FILE_NAME = APP_NAME.replaceAll("[^a-zA-Z0-9.-]", "_") + "-" + params.getPaymentProtocolId();
+    private static String WALLET_FILE_NAME = "";
     public static WalletAppKit groestlcoin;
     public static Main instance;
 
@@ -59,8 +55,22 @@ public class Main extends Application {
 
     public static void main(String[] args) 
     {
-        Security.setProperty("crypto.policy", "unlimited");
+        SettingsSaveManager settings = new SettingsSaveManager(SettingsSaveManager.saveFile);
+        settings.loadSettings();
 
+        if(SettingsSaveManager.useTestnet)
+        {
+            params = TestNet3Params.get();
+        }
+        else
+        {
+            params = MainNetParams.get();
+        }
+
+        WALLET_FILE_NAME = APP_NAME.replaceAll("[^a-zA-Z0-9.-]", "_") + "-" + params.getPaymentProtocolId();
+
+        //this if for Tor support later on, but i cant seem to get the Tor to download the consensus.
+       // CryptoRestrictions.removeCryptographyRestrictions();
         launch(args);
     }
 
@@ -92,6 +102,9 @@ public class Main extends Application {
         uiStack.getChildren().add(notificationBar);
         mainWindow.setScene(scene);
         mainWindow.setResizable(false);
+        //saving this for later for when i can work out .fxml scaling
+        //mainWindow.setMaxWidth(Screen.getPrimary().getBounds().getWidth() / 2);
+        //mainWindow.setMaxHeight(Screen.getPrimary().getBounds().getHeight() / 2);
         mainWindow.setMaxWidth(800);
         mainWindow.setMaxHeight(451);
 
@@ -133,7 +146,7 @@ public class Main extends Application {
         };
 
         //for later
-       // groestlcoin.useTor();
+      //  groestlcoin.useTor();
 
         groestlcoin.setDownloadListener(controller.progressBarUpdater()).setBlockingStartup(false).setUserAgent(APP_NAME, "1.0");
 
@@ -190,24 +203,6 @@ public class Main extends Application {
     }
 
     private OverlayUI currentOverlay;
-
-    public <T> OverlayUI<T> overlayUI(Node node, T controller)
-    {
-        checkGuiThread();
-        OverlayUI<T> pair = new OverlayUI<T>(node, controller);
-
-        try
-        {
-            controller.getClass().getField("overlayUI").set(controller, pair);
-        }
-        catch (IllegalAccessException | NoSuchFieldException ignored)
-        {
-            //lol, nothing here because im lazy as fuck
-        }
-
-        pair.show();
-        return pair;
-    }
 
     //loads given .fxml file and displays it onto the Scene.
     public <T> OverlayUI<T> overlayUI(String name)

@@ -66,11 +66,6 @@ public class WalletSettingsController {
         checkNotNull(mnemonicCode);    // Already checked for encryption.
         String origWords = Utils.join(mnemonicCode);
         wordsArea.setText(origWords);
-
-        MnemonicCode codec = unchecked(MnemonicCode::new);
-        TextFieldValidator validator = new TextFieldValidator(wordsArea, text ->
-            !didThrow(() -> codec.check(Splitter.on(' ').splitToList(text)))
-        );
     }
 
     public void closeClicked(ActionEvent event)

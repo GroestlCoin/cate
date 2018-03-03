@@ -78,7 +78,8 @@ public class MainController {
         sendMoneyOutBtn.disableProperty().bind(model.balanceProperty().isEqualTo(Coin.ZERO));
 
         //for later
-     /**   TorClient torClient = Main.groestlcoin.peerGroup().getTorClient();
+        //update 03/March/2018: Apparently the Orchid Tor Java lib is outdated and does not work on the current Tor network. :(
+      /**  TorClient torClient = Main.groestlcoin.peerGroup().getTorClient();
         if (torClient != null) {
             SimpleDoubleProperty torProgress = new SimpleDoubleProperty(-1);
             String torMsg = "Initialising Tor";
@@ -100,8 +101,8 @@ public class MainController {
                 }
             });
         } else {
-        }**/
-
+        }
+**/
         model.syncProgressProperty().addListener(x -> {
             if (model.syncProgressProperty().get() >= 1.0)
             {

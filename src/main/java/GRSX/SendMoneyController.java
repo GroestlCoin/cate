@@ -76,6 +76,7 @@ public class SendMoneyController {
                 }
 
                 req.ensureMinRequiredFee = false;
+                //converting because the UI uses sats/byte, so we need to convert that to fee per kb here
                 req.feePerKb = Coin.valueOf(Long.parseLong(feeEdit.getText()) * 1000L);
                 sendResult = Main.groestlcoin.wallet().sendCoins(Main.groestlcoin.peerGroup(), req);
                 Futures.addCallback(sendResult.broadcastComplete, new FutureCallback<Transaction>()
