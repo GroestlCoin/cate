@@ -2,7 +2,7 @@
 
 Vortex is an SPV light-wallet with a simplistic, minimal design language for newcomers to cryptocurrency, and even experts too! The wallet was carefully designed to not be too confusing (like some wallets these days), but still have enough to suit basic needs.
 
-Vortex v1.0.0 - Andromeda
+Vortex v1.0.0 - "Andromeda"
 -------
 + Complete UI redesign
   - Color adjustments to match Yokomoko's EasyMiner.
